@@ -48,9 +48,9 @@ This covers essential competitive programming topics like loops, arrays, strings
 
 ## 📈 Progress Tracker
 
-- ✅ Completed: `X/50`
-- 🕒 In Progress: `Y`
-- 🧠 Review Needed: `Z`
+- ✅ Completed: `10/50`
+- 🕒 In Progress: `40`
+- 🧠 Review Needed: none
 
 ---
 
