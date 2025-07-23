@@ -62,26 +62,51 @@ int main() {
         freopen("output.txt", "w", stdout);
     #endif
 
-    int arr[] = {1 , 2 , 3 , 4 , 5 , 6};
-    int size = sizeof(arr) / sizeof(arr[0]);// Calculate the number of elements in the array as sizeof(arr) gives the total size in bytes and sizeof(arr[0]) gives the size of one element.
+    // int arr[] = {1 , 2 , 3 , 4 , 5 , 6};
+    // int size = sizeof(arr) / sizeof(arr[0]);// Calculate the number of elements in the array as sizeof(arr) gives the total size in bytes and sizeof(arr[0]) gives the size of one element.
     
 
 
-    // TRAVERSAL
-    // traversal(arr , size);
-    // cout  << sum_arr(arr , size);
+    // // TRAVERSAL
+    // // traversal(arr , size);
+    // // cout  << sum_arr(arr , size);
 
-    search(arr, size , 3);
+    // search(arr, size , 3);
 
-    // reverse(arr , size);
+    // // reverse(arr , size);
+    // // traversal(arr, size);
+
+    // cout << "\n\n" << "Reverse by Recursion" << "\n\n";
+    // recursive_reverse(arr, 0 , size-1);
     // traversal(arr, size);
 
-    cout << "\n\n" << "Reverse by Recursion" << "\n\n";
-    recursive_reverse(arr, 0 , size-1);
-    traversal(arr, size);
+    // // for(int i : arr){
+    // //     cout << i << " ";
+    // // }
 
-    // for(int i : arr){
-    //     cout << i << " ";
-    // }
+
+
+
+
+
+
+
+
+
+    //*****************************************Ques******************************************************* */
+    // int n;
+    // cin >> n;
+    int arr[] = {1,2,3,4,7,7} ;
+    int n = sizeof(arr)/sizeof(arr[0]);
+    FOR(i , 1 , n){
+        
+        if(arr[i] !=(arr[i-1]+1)){
+            for (int j =arr[i-1]+1 ; j<=arr[i]-1 ;j++){
+                cout << j << endl;
+            }
+        }
+    }
+
+
     return 0;
 }
