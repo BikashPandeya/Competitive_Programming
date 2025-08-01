@@ -8,8 +8,6 @@ int main(){
         int k , count = 1;
         string s;
         cin >> k >> s;
-        string temp = s , s1 = s;;
-        char ch = s[k-1];
         for(int i=0;i<k;i++){
             if(s[i]-s[k-i-1] == 2 || s[i]-s[k-i-1] == -2){
                continue;
