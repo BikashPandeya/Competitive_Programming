@@ -1,0 +1,134 @@
+Notes on Number Theory & Maths in Competitive Programming
+
+## Introduction to Maths in CP
+
+Maths in Competitive Programming (CP) and Data Structures & Algorithms (DSA) doesn't refer to advanced topics like calculus or trigonometry. [cite_start]Instead, it focuses on fundamental number theory concepts and how to implement them efficiently in code. [cite: 1]
+
+Key topics include:
+* [cite_start]**Prime Numbers** and the **Sieve Algorithm**. [cite: 3, 7]
+* [cite_start]**Binary and Modular Exponentiation**. [cite: 8]
+* [cite_start]**Modular Arithmetic**. [cite: 7]
+* [cite_start]**Factors of a Number**, **GCD**, and **LCM**. [cite: 3]
+* [cite_start]**Factorials** and **nCr (Combinations)**. [cite: 4]
+
+[cite_start]The video will cover the theory for each topic, followed by practice problems from Codeforces. [cite: 4]
+
+***
+
+## Prime Numbers and Sieve of Eratosthenes
+
+### 1. What is a Prime Number?
+[cite_start]A prime number is a natural number greater than 1 that has exactly two distinct factors: **1 and the number itself**. [cite: 11]
+* [cite_start]**Factors**: Numbers that can divide a given number completely. [cite: 12]
+* [cite_start]**Example**: The factors of 13 are 1 and 13, making it a prime number. [cite: 13, 14] [cite_start]The factors of 12 are 1, 2, 3, 4, 6, and 12, so it is not prime. [cite: 13]
+
+[cite_start]An alternative way to define a prime number $N$ is that it has **no factors in the range $[2, N-1]$**. [cite: 16, 17]
+
+### 2. How to Check if a Number is Prime
+
+[cite_start]**Problem**: Given a number $N$, check if it is prime. [cite: 15]
+
+**Method 1: Naive Approach**
+[cite_start]Iterate a loop from $i=2$ to $N-1$. [cite: 22] [cite_start]If any $i$ divides $N$ completely, then $N$ is not prime. [cite: 23] [cite_start]If the loop completes without finding any such divisor, $N$ is prime. [cite: 24]
+
+* [cite_start]**Corner Cases**: 0 and 1 are not considered prime numbers. [cite: 20]
+* [cite_start]**Time Complexity**: $O(N)$. [cite: 32] This is too slow for large numbers.
+
+**Method 2: Optimized Approach ($O(\sqrt{N})$)**
+[cite_start]We only need to check for factors up to the **square root of N**. [cite: 58] [cite_start]This is because factors always appear in pairs. [cite: 41] [cite_start]If $i$ is a factor of $N$, then $N/i$ is also a factor. [cite: 41] [cite_start]If we don't find a factor up to $\sqrt{N}$, we won't find one beyond it either. [cite: 57, 58]
+
+* [cite_start]The loop runs from $i=2$ up to $\sqrt{N}$ (or $i \times i \le N$). [cite: 58]
+* [cite_start]**Time Complexity**: $O(\sqrt{N})$. [cite: 59] This is much more efficient.
+
+### 3. Sieve of Eratosthenes
+
+[cite_start]**Problem**: Find all prime numbers in a given range, from 1 to $N$. [cite: 61, 67]
+
+[cite_start]The Sieve of Eratosthenes is an efficient algorithm for this task, especially when you need to answer multiple queries about primality within a range. [cite: 67]
+
+**Algorithm Steps**:
+1.  [cite_start]Create a **boolean array** (or vector) `isPrime` of size $N+1$ and initialize all entries to `true`, assuming every number is prime. [cite: 71, 76]
+2.  [cite_start]Mark **0 and 1 as not prime** (`isPrime[0] = isPrime[1] = false`). [cite: 78]
+3.  [cite_start]Start a loop with $i=2$ up to $i \times i \le N$. [cite: 81]
+4.  [cite_start]If `isPrime[i]` is `true` (meaning $i$ is a prime number), then mark all **multiples of $i$** (like $2i, 3i, 4i, ...$) as not prime (`false`). [cite: 79, 80, 82] [cite_start]We can start marking from $i \times i$, as smaller multiples would have already been marked by smaller primes. [cite: 84]
+5.  [cite_start]After the loop finishes, the indices $i$ for which `isPrime[i]` is still `true` are the prime numbers in the range $[1, N]$. [cite: 89]
+
+* [cite_start]**Time Complexity**: $O(N \log(\log N))$, which is very efficient. [cite: 98]
+
+***
+
+## Modular Arithmetic and Exponentiation
+
+### 1. Modular Arithmetic
+[cite_start]This is used when calculations involve very large numbers that might cause an overflow. [cite: 184] [cite_start]Problems often ask for the answer modulo a large number (e.g., $10^9 + 7$). [cite: 182]
+
+**Properties**:
+* [cite_start]$(a + b) \pmod{m} = ((a \pmod{m}) + (b \pmod{m})) \pmod{m}$ [cite: 186, 187]
+* [cite_start]$(a - b) \pmod{m} = ((a \pmod{m}) - (b \pmod{m}) + m) \pmod{m}$ (add m to handle negative results) [cite: 187]
+* [cite_start]$(a \times b) \pmod{m} = ((a \pmod{m}) \times (b \pmod{m})) \pmod{m}$ [cite: 187, 191]
+
+### 2. Binary Exponentiation (Fast Power)
+[cite_start]**Problem**: Calculate $a^b$ efficiently. [cite: 196]
+
+[cite_start]A naive approach of multiplying $a$ by itself $b$ times has a time complexity of $O(b)$. [cite: 207, 208, 221] Binary exponentiation is much faster.
+
+**Recursive Logic**:
+* [cite_start]**Base Case**: If $b=0$, $a^0 = 1$. [cite: 213]
+* **If $b$ is even**: $a^b = (a^{b/2}) \times (a^{b/2})$. [cite_start]We recursively calculate $a^{b/2}$ once and square the result. [cite: 215]
+* [cite_start]**If $b$ is odd**: $a^b = a \times a^{b-1} = a \times (a^{(b-1)/2}) \times (a^{(b-1)/2})$. [cite: 215]
+
+* [cite_start]**Time Complexity**: $O(\log b)$, as the power $b$ is halved in each step. [cite: 221]
+
+### 3. Modular Exponentiation
+[cite_start]**Problem**: Calculate $(a^b) \pmod{m}$ for very large $a, b$. [cite: 197, 223]
+
+[cite_start]Calculating $a^b$ first and then taking the modulo will cause an overflow. [cite: 198] [cite_start]Instead, we combine **Binary Exponentiation** with the properties of **Modular Arithmetic**. [cite: 227] [cite_start]In every multiplication step of the binary exponentiation algorithm, we apply the modulo operator. [cite: 230, 231, 232]
+
+***
+
+## GCD and LCM
+
+### 1. GCD (Greatest Common Divisor)
+[cite_start]GCD, also known as HCF (Highest Common Factor), is the largest positive integer that divides two or more integers without leaving a remainder. [cite: 267, 268]
+
+**Euclidean Algorithm**:
+[cite_start]This is a highly efficient method to compute the GCD of two integers, $a$ and $b$. [cite: 272]
+* [cite_start]**Recursive Formula**: $\text{GCD}(a, b) = \text{GCD}(b, a \pmod{b})$. [cite: 278]
+* **Base Case**: When the second number becomes 0, the first number is the GCD. [cite_start]$\text{GCD}(a, 0) = a$. [cite: 275]
+* [cite_start]**Time Complexity**: $O(\log(\min(a, b)))$. [cite: 293]
+
+### 2. LCM (Lowest Common Multiple)
+[cite_start]LCM is the smallest positive integer that is a multiple of two or more integers. [cite: 296]
+
+**Relationship between GCD and LCM**:
+For any two positive integers $a$ and $b$:
+[cite_start]$$a \times b = \text{GCD}(a, b) \times \text{LCM}(a, b)$$ [cite: 299, 300]
+
+[cite_start]This formula allows us to calculate the LCM easily once we have the GCD: [cite: 301]
+[cite_start]$$\text{LCM}(a, b) = \frac{a \times b}{\text{GCD}(a, b)}$$ [cite: 301]
+
+***
+
+## Factorials and nCr (Combinations)
+
+### 1. Factorial
+[cite_start]The factorial of a non-negative integer $n$, denoted by $n!$, is the product of all positive integers less than or equal to $n$. [cite: 346]
+* $n! [cite_start]= n \times (n-1) \times \dots \times 2 \times 1$. [cite: 346]
+* **Base Cases**: $0! = 1$ and $1! [cite_start]= 1$. [cite: 348, 349]
+* [cite_start]Can be calculated using a simple loop from 1 to $n$. [cite: 347]
+
+### 2. nCr (Combinations)
+[cite_start]nCr represents the number of ways to choose $r$ items from a set of $n$ distinct items, where the order of selection does not matter. [cite: 358]
+
+**Method 1: Using Factorials**
+$$\text{nCr} = \frac{n!}{r! [cite_start]\times (n-r)!}$$ [cite: 352]
+This is straightforward but can be slow and prone to overflow if $n$ is large.
+
+**Method 2: Using Pascal's Identity (Recursive)**
+This is based on the principle of Pascal's triangle.
+[cite_start]$$\text{nCr} = \text{(n-1)C(r-1)} + \text{(n-1)Cr}$$ [cite: 360, 361]
+* **Base Cases**:
+    * [cite_start]If $r > n$, $\text{nCr} = 0$. [cite: 356]
+    * [cite_start]If $r=0$ or $r=n$, $\text{nCr} = 1$. [cite: 355]
+
+This recursive approach is often used in dynamic programming solutions.
